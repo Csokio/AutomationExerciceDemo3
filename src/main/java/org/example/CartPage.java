@@ -32,7 +32,7 @@ public class CartPage extends Pages{
         driver.findElement(BUTTON_PLACE_ORDER).click();
     }
 
-    private final By TABLE_ROW = By.xpath("//div[@id=\"cart_info\"]//tbody/tr//div[@id=\"cart_info\"]//tbody/tr[1]");
+    private final By TABLE_ROW = By.xpath("//div[@id=\"cart_info\"]//tbody/tr[1]");
     public void saveCartItem(String fileName)
     {
         WebElement image = driver.findElement(TABLE_ROW).findElement(By.xpath("./td[1]//img"));
