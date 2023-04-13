@@ -1,0 +1,15 @@
+
+[
+  {
+  "name": "WOMEN",
+  "categories": ["Dress", "Tops", "Saree"]
+  },
+  {
+    "name": "MEN",
+    "categories": ["Tshirts", "Jeans"]
+  },
+  {
+  "name": "KIDS",
+  "categories": ["Dress", "Tops &amp; Shirts"]
+  }
+]
