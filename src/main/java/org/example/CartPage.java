@@ -9,7 +9,9 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 
 public class CartPage extends Pages{
@@ -33,23 +35,25 @@ public class CartPage extends Pages{
     }
 
     private final By TABLE_ROW = By.xpath("//div[@id=\"cart_info\"]//tbody/tr[1]");
-    public void saveCartItem(String fileName)
-    {
+    public void saveCartItem() throws IOException {
+
+        File file = new File("image.png");
+        URL url = new URL("https://automationexercise.com/get_product_picture/1");
+        BufferedImage image = ImageIO.read(url);
+        ImageIO.write(image, "png", file);
+    }
+
+    public void saveCartItemTwo() {
         WebElement image = driver.findElement(TABLE_ROW).findElement(By.xpath("./td[1]//img"));
 
         String logoSrc = image.getAttribute("src");
         try {
-            /*File file = new File(fileName);
-            FileWriter fileWriter = new FileWriter(file);*/
-
-            URL imageURL = new URL("https://automationexercise.com/" + logoSrc);
+            URL imageURL = new URL(logoSrc);
             BufferedImage saveImage = ImageIO.read(imageURL);
-            ImageIO.write(saveImage, "png", new File("itemData.txt"));
-
-            //WebElement description = driver.findElement(TABLE_ROW).findElement(By.xpath("./td[2]//a"));
-
+            ImageIO.write(saveImage, "png", new File("image2.png"));
         } catch (Exception e) {
-            System.out.println(e.getStackTrace());
+            System.out.println(Arrays.toString(e.getStackTrace()));
         }
+
     }
 }

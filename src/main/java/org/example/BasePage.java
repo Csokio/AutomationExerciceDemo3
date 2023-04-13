@@ -9,6 +9,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class BasePage extends Pages{
 
@@ -75,4 +79,28 @@ public class BasePage extends Pages{
         driver.findElement(BUTTON_VIEW_CART).click();
         return new CartPage(driver);
     }
+
+    //TODO JSON WRITE AND READ
+
+    private final By CATEGORIES= By.xpath("//div[@id='accordian']/div");
+
+    public Map<String, List<String>> getCategoriesMap(){
+
+        Map<String, List<String>> mapCategories = new HashMap<>();
+
+        List<WebElement> listMainCategories = driver.findElements(CATEGORIES);
+        for(WebElement category: listMainCategories){
+            List<String> listValues = new ArrayList<>();
+            String key = category.getText();
+            List<WebElement> listSubCategories = category.findElements(By.xpath("./div/div/ul/li"));
+
+            for(WebElement sub: listSubCategories){
+                String value = sub.findElement(By.xpath("./a")).getAttribute("innerHTML").trim();
+                listValues.add(value);
+            }
+            mapCategories.put(key, listValues);
+        }
+        return  mapCategories;
+    }
+
 }
